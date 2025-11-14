@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2025-10-31 15:31:31.764257",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-10-31 15:31:31.764257",
+ "modified_by": "Administrator",
+ "module": "naman",
+ "name": "dept_incharge",
+ "owner": "Administrator",
+ "page_name": "dept_incharge",
+ "roles": [
+  {
+   "role": "\u2060Dept Incharge"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Department Incharge"
+}

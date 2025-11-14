@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+[branch "main"]
+	vscode-merge-base = upstream/main
+[remote "origin"]
+	url = https://github.com/Uc102003/naman.git
+	fetch = +refs/heads/*:refs/remotes/origin/*

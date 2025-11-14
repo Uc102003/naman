@@ -1,0 +1,141 @@
+/* 🌐 General Page Layout */
+body {
+	font-family: 'Poppins', sans-serif;
+	background: #f4f6f9;
+	margin: 0;
+	padding: 0;
+}
+
+/* 🧭 Navbar Styling */
+.navbar {
+	background: linear-gradient(90deg, #004aad, #007bff);
+	padding: 12px 25px;
+	border-radius: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+}
+
+.navbar .nav-link {
+	color: white;
+	text-decoration: none;
+	font-weight: 600;
+	padding: 8px 16px;
+	border-radius: 6px;
+	transition: all 0.3s ease;
+}
+
+.navbar .nav-link:hover {
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.navbar .nav-link.active {
+	background: #002b80;
+}
+
+/* 📄 Main Content Area */
+.content-area {
+	background: white;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.content-area h2 {
+	color: #004aad;
+	font-weight: 600;
+	margin-bottom: 10px;
+}
+
+/* 🧾 Table Container */
+.table-container {
+	margin-top: 20px;
+	overflow-x: auto;
+}
+
+.custom-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 15px;
+	background: #fff;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.custom-table th {
+	background: linear-gradient(90deg, #004aad, #007bff);
+	color: white;
+	padding: 12px;
+	text-align: left;
+	font-weight: 600;
+}
+
+.custom-table td {
+	padding: 12px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	color: #333;
+}
+
+.custom-table tr:hover {
+	background: #f8faff;
+}
+
+/* 🟢 Status Badges */
+.status-badge {
+	padding: 4px 10px;
+	border-radius: 20px;
+	font-size: 13px;
+	font-weight: 600;
+	color: white;
+	text-transform: capitalize;
+}
+.status-badge.approved { background-color: #43e97b; }
+.status-badge.pending { background-color: #f4c542; color: #333; }
+.status-badge.rejected { background-color: #f05454; }
+.status-badge.assigned { background-color: #007bff; }
+.status-badge.completed { background-color: #28a745; }
+.status-badge["in progress"] { background-color: #f4c542; }
+
+/* 🎯 Action Buttons */
+.btn-update-status {
+	background: #004aad;
+	color: #fff;
+	border: none;
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-size: 13px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	margin-right: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+.btn-update-status:hover {
+	transform: scale(1.05);
+	opacity: 0.9;
+}
+.btn-update-status[data-status="Completed"] {
+	background: #28a745;
+}
+.btn-update-status[data-status="In Progress"] {
+	background: #f4c542;
+	color: #333;
+}
+
+/* ⚠️ Error Text */
+.error-text {
+	color: red;
+	font-weight: 500;
+	text-align: center;
+	margin-top: 20px;
+}

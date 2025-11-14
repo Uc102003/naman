@@ -1,0 +1,73 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"pEG_D_pF1r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Dept Requestor</span>\",\"col\":12}},{\"id\":\"rI4pLb0gP4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Draft Count\",\"col\":4}},{\"id\":\"ZhXlNmTLCC\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"M1tocMzVFA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Request Management\",\"col\":5}}]",
+ "creation": "2025-10-17 21:19:51.726291",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "image-view",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Dept Requestor Custom",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Department Dash",
+   "link_count": 0,
+   "link_to": "dept_requestor",
+   "link_type": "Page",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2025-10-18 11:13:21.209842",
+ "modified_by": "Administrator",
+ "module": "naman",
+ "name": "Dept Requestor Custom",
+ "number_cards": [
+  {
+   "label": "Draft Count",
+   "number_card_name": "Status Wise Card"
+  },
+  {
+   "label": "Draft Count",
+   "number_card_name": "Status Wise Card"
+  }
+ ],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Dept Requestor"
+  },
+  {
+   "role": "Dept Requestor"
+  }
+ ],
+ "sequence_id": 26.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Request Management",
+   "link_to": "Request Management",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Request Management",
+   "link_to": "Request Management",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Dept Requestor Custom"
+}

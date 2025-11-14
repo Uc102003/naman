@@ -1,0 +1,44 @@
+{
+  "doctype": "Workspace",
+  "name": "dept_requestor_custom",
+  "title": "Dept Requestor Custom",
+  "module": "naman",
+  "hide_custom": 0,
+  "roles": [
+    {"role": "Dept Requestor"},
+    {"role": "Dept Incharge"},
+    {"role": "IT Users"}
+  ],
+  "charts": [],
+  "content": "[{\"id\":\"pEG_D_pF1r\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Dept Requestor</span>\",\"col\":12}},{\"id\":\"rI4pLb0gP4\",\"type\":\"number_card\",\"data\":{\"number_card_name\":\"Draft Count\",\"col\":4}},{\"id\":\"ZhXlNmTLCC\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"M1tocMzVFA\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Request Management\",\"col\":5}}]",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "for_user": "",
+  "icon": "image-view",
+  "idx": 0,
+  "indicator_color": "green",
+  "is_hidden": 0,
+  "label": "Dept Requestor",
+  "links": [],
+  "number_cards": [
+    {
+      "label": "Draft Count",
+      "number_card_name": "Status Wise Card"
+    }
+  ],
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "quick_lists": [],
+  "shortcuts": [
+    {
+      "color": "Grey",
+      "doc_view": "List",
+      "label": "Request Management",
+      "link_to": "Request Management",
+      "stats_filter": "[]",
+      "type": "DocType"
+    }
+  ],
+  "sequence_id": 35.0
+}

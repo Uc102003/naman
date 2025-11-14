@@ -1,0 +1,41 @@
+[
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 1,
+  "modified": "2025-09-11 18:54:37.854045",
+  "name": "⁠Dept Incharge",
+  "restrict_to_domain": null,
+  "role_name": "⁠Dept Incharge",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 1,
+  "modified": "2025-09-11 18:54:53.891045",
+  "name": "Dept Requestor",
+  "restrict_to_domain": null,
+  "role_name": "Dept Requestor",
+  "two_factor_auth": 0
+ },
+ {
+  "desk_access": 1,
+  "disabled": 0,
+  "docstatus": 0,
+  "doctype": "Role",
+  "home_page": null,
+  "is_custom": 0,
+  "modified": "2025-09-13 20:27:09.218201",
+  "name": "⁠IT Users",
+  "restrict_to_domain": null,
+  "role_name": "⁠IT Users",
+  "two_factor_auth": 0
+ }
+]

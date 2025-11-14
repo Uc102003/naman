@@ -1,0 +1,23 @@
+{
+ "content": null,
+ "creation": "2025-11-01 15:38:16.431459",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2025-11-01 15:38:16.431459",
+ "modified_by": "Administrator",
+ "module": "naman",
+ "name": "it_users",
+ "owner": "Administrator",
+ "page_name": "it_users",
+ "roles": [
+  {
+   "role": "\u2060IT Users"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "IT Users "
+}

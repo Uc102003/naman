@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Department Requestor Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header><i class="fa-solid fa-building-columns"></i> Department Requestor Portal</header>
+
+    <div class="dashboard-grid">
+        <div class="card">
+            <i class="fa fa-list"></i>
+            <h3>Total Requests</h3>
+            <p>18</p>
+        </div>
+        <div class="card">
+            <i class="fa fa-check-circle"></i>
+            <h3>Approved</h3>
+            <p>10</p>
+        </div>
+        <div class="card">
+            <i class="fa fa-clock"></i>
+            <h3>Pending</h3>
+            <p>8</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2025 Department Portal | Designed by Umesh Chaudhari</footer>
+</body>
+</html>

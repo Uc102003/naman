@@ -1,0 +1,60 @@
+{% extends "templates/web.html" %}
+{% block title %}Submit a Request{% endblock %}
+
+{% block page_content %}
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-navbar shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-light" href="/">
+      <i class="fa fa-globe"></i> SANT NIRANKARI MISSION
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link active" href="/request-form">Request</a></li>
+        <li class="nav-item"><a class="nav-link" href="/review-requests">Review</a></li>
+        <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="bg-overlay d-flex justify-content-center align-items-start min-vh-100">
+  <div class="glass-card p-5 mt-5 shadow-lg animate__animated animate__fadeInUp">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <div>
+        <h2 class="fw-bold text-white mb-1">Submit Your Request</h2>
+        <p class="mb-0 small text-light">Fill the form below and we will process it.</p>
+      </div>
+      <div>
+        <!-- optional small brand/logo area -->
+        <img src="/assets/naman/images/logo.png" alt="logo" style="height:36px; opacity:0.95;">
+      </div>
+    </div>
+
+    <!-- Web form render -->
+    <form id="naman-webform" role="form" method="POST" enctype="multipart/form-data">
+      {{ webform.render() }}
+      <div class="text-center mt-4">
+        <button id="naman-submit-btn" type="submit" class="btn btn-glass px-5 py-2 fw-bold shadow-sm">
+          <i class="fa fa-paper-plane"></i> Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center text-light py-4 mt-5">
+  <small>© {{ frappe.utils.now_datetime().year }} Sant Nirankari Mission — Built with Frappe</small>
+</footer>
+
+<!-- Custom CSS and animate.css -->
+<link rel="stylesheet" href="/assets/naman/css/request_form.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+{% endblock %}

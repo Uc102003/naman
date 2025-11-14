@@ -1,0 +1,76 @@
+/* request_form.css - modern glass UI for web form */
+
+/* base */
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0f1724 0%, #1e3c72 60%, #2a5298 100%);
+  font-family: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #fff;
+}
+
+/* navbar */
+.glass-navbar {
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.04));
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0.5rem 0;
+}
+
+.glass-navbar .navbar-brand { font-size: 1rem; }
+.glass-navbar .nav-link { color: rgba(255,255,255,0.92) !important; margin-left: 10px; }
+.glass-navbar .nav-link:hover { color: #ffd54f !important; }
+
+/* background overlay & container */
+.bg-overlay { min-height: 100vh; padding-top: 100px; padding-bottom: 60px; }
+
+/* glass card */
+.glass-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(10,10,10,0.06));
+  border-radius: 16px;
+  width: 100%;
+  max-width: 720px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.5);
+}
+
+/* labels and inputs */
+.glass-card label { color: rgba(255,255,255,0.92); font-weight: 600; }
+.glass-card input.form-control,
+.glass-card select.form-select,
+.glass-card textarea.form-control {
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.06) !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 10px 12px !important;
+}
+
+.glass-card input::placeholder,
+.glass-card textarea::placeholder {
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* submit button */
+.btn-glass {
+  background: linear-gradient(90deg, #4caf50 0%, #2e7d32 100%);
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  padding: 10px 22px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-glass:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(46,125,50,0.18); }
+
+/* small screens */
+@media (max-width: 576px) {
+  .glass-card { padding: 20px; margin: 12px; }
+  .bg-overlay { padding-top: 84px; }
+}
+
+/* focus styles for accessibility */
+.glass-card input:focus, .glass-card textarea:focus, .glass-card select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 4px rgba(66,153,225,0.12);
+  border-color: rgba(66,153,225,0.6) !important;
+}

@@ -1,0 +1,39 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"wnsJ64hrhw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">\u2060IT Users</span>\",\"col\":12}},{\"id\":\"swFSEQUl7u\",\"type\":\"quick_list\",\"data\":{\"quick_list_name\":\"Request Management\",\"col\":4}}]",
+ "creation": "2025-09-13 17:06:51.847129",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "support",
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "\u2060IT Users",
+ "links": [],
+ "modified": "2025-10-18 11:13:20.686091",
+ "modified_by": "Administrator",
+ "module": "Naman",
+ "name": "\u2060IT Users",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [
+  {
+   "document_type": "Request Management",
+   "label": "Request Management",
+   "quick_list_filter": "[[\"Request Management\",\"status\",\"=\",\"Approved\",false]]"
+  }
+ ],
+ "roles": [
+  {
+   "role": "\u2060IT Users"
+  }
+ ],
+ "sequence_id": 23.0,
+ "shortcuts": [],
+ "title": "\u2060IT Users"
+}
