@@ -1,8 +1,8 @@
 ## Naman
 
-Naman - Custom App
+Naman - Umesh custom appp
 
-bench get-app https://github.com/Inshasis/naman.git <br>
+bench get-app https://github.com/Uc102003/Naman <br>
 bench --site <site_name> install-app naman <br>
 bench migrate <br>
 becnh restart<br>
