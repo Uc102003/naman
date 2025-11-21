@@ -5,7 +5,7 @@ import frappe
 import re
 from frappe.model.document import Document
 from frappe.utils.pdf import get_pdf
-from frappe.utils import now, add_to_date, now_datetime
+from frappe.utils import now
 
 
 class RequestManagement(Document):
@@ -17,10 +17,10 @@ class RequestManagement(Document):
         if not self.status:
             self.status = "Draft"
 
-        # custom timestamp used by scheduler
+        # For scheduler
         self.request_created_time = now()
 
-        # For Guest submissions
+        # Handle Guest user
         if frappe.session.user == "Guest":
             if not getattr(self, "email", None):
                 self.email = "guest@noreply.com"
@@ -50,11 +50,12 @@ class RequestManagement(Document):
         self.notify_rejected()
 
     # ================================================================
-    # EMAIL HELPERS
+    # SAFE SENDMAIL WRAPPER
     # ================================================================
     def _safe_sendmail(self, recipients, subject, message, attachments=None):
         if not recipients:
             return
+
         try:
             frappe.sendmail(
                 recipients=recipients,
@@ -75,8 +76,8 @@ class RequestManagement(Document):
                 "Request Received (Draft)",
                 f"""
                 Hello,<br>
-                Your request <b>{self.name}</b> has been received and saved as Draft.<br>
-                It will automatically submit after 48 hours.
+                Your request <b>{self.name}</b> has been created as Draft.<br>
+                It will auto-submit after 48 hours.
                 """
             )
 
@@ -101,17 +102,18 @@ class RequestManagement(Document):
     # ================================================================
     def notify_incharge(self):
         incharge_email = getattr(self, "incharge_email", None)
+
         if not incharge_email:
-            frappe.errprint("[DEBUG] No incharge email defined.")
+            frappe.errprint("[DEBUG] No incharge email assigned.")
             return
 
         doc_url = frappe.utils.get_url(f"/app/request-management/{self.name}")
 
-        msg = f"""
+        html = f"""
         <div>
             <h3>New Request Submitted</h3>
             <p>Dear {self.incharge_name},</p>
-            <p>New request (ID: {self.name}) has been submitted by {self.requested_by_name}.</p>
+            <p>A new request (ID: {self.name}) has been submitted by {self.requested_by_name}.</p>
             <p><a href="{doc_url}">Open Request</a></p>
         </div>
         """
@@ -123,52 +125,64 @@ class RequestManagement(Document):
         except Exception as e:
             frappe.errprint(f"[DEBUG] PDF creation failed: {e}")
 
-        self._safe_sendmail(
-            [incharge_email],
-            "New Request Submitted",
-            msg,
-            attachments
-        )
+        self._safe_sendmail([incharge_email], "New Request Submitted", html, attachments)
+
 
 # ===================================================================
-# HELPER FUNCTIONS
+# HELPER: CLEAN ROLE NAMES
 # ===================================================================
-
 def clean_role(role):
     return re.sub(r'[^\x20-\x7E]', '', role).strip().lower()
 
 
+# ===================================================================
+# FIXED: RETURN REAL EMAILS OF USERS WITH THE ROLE
+# ===================================================================
 def get_users_by_role(role_name="IT Users"):
-    users = frappe.get_all(
+    user_rows = frappe.get_all(
         "Has Role",
         filters={"role": role_name},
         fields=["parent as user"]
     )
 
-    clean_users = []
-    for u in users:
-        if u.user and not u.user.startswith("\u2060"):
-            clean_users.append(u.user)
+    final_emails = []
 
-    frappe.errprint(f"[DEBUG] IT role users found: {clean_users}")
-    return clean_users
+    for row in user_rows:
+        username = row.user
+
+        # Skip invalid entries
+        if not username or username.startswith("\u2060"):
+            continue
+
+        # Get actual email from User
+        email = frappe.db.get_value("User", username, "email")
+
+        if email and "@" in email:
+            final_emails.append(email)
+
+    frappe.errprint(f"[DEBUG] IT emails resolved: {final_emails}")
+    return final_emails
 
 
+# ===================================================================
+# FIXED IT TEAM NOTIFICATION
+# ===================================================================
 def notify_it_item_Custom(doc):
     it_users_email = get_users_by_role("IT Users")
-    frappe.errprint(f"[DEBUG] Final IT user email list: {it_users_email}")
+
+    frappe.errprint(f"[DEBUG] Final IT email list: {it_users_email}")
 
     if not it_users_email:
-        frappe.errprint("[DEBUG] No IT users found. IT email skipped.")
+        frappe.errprint("[DEBUG] No IT users found. Skipping IT mail.")
         return
 
     doc_url = frappe.utils.get_url(f"/app/request-management/{doc.name}")
 
-    message = f"""
+    html = f"""
     <div>
         <h3>Request Forwarded to IT</h3>
         <p>Dear IT Team,</p>
-        <p>A request (ID: {doc.name}) has been approved by {doc.incharge_name}.</p>
+        <p>Request (ID: {doc.name}) has been approved by {doc.incharge_name}.</p>
         <p><a href="{doc_url}">View Request</a></p>
     </div>
     """
@@ -178,26 +192,27 @@ def notify_it_item_Custom(doc):
         pdf = get_pdf(frappe.get_print("Request Management", doc.name, print_format="RM"))
         attachments = [{"fname": f"{doc.name}_RM.pdf", "fcontent": pdf}]
     except Exception as e:
-        frappe.errprint(f"[DEBUG] PDF creation failed: {e}")
+        frappe.errprint(f"[DEBUG] PDF generation failed: {e}")
 
     try:
         frappe.sendmail(
             recipients=it_users_email,
             subject="Request Approved → Forwarded to IT",
-            message=message,
+            message=html,
             attachments=attachments
         )
-        frappe.errprint("[DEBUG] IT email sent successfully.")
+        frappe.errprint("[DEBUG] IT email sent.")
     except Exception as e:
         frappe.errprint(f"[DEBUG] Failed sending IT email: {e}")
 
-# ===================================================================
-# CUSTOM BUTTON METHODS
-# ===================================================================
 
+# ===================================================================
+# CUSTOM BUTTON: SUBMIT
+# ===================================================================
 @frappe.whitelist()
 def submit_request(docname):
     doc = frappe.get_doc("Request Management", docname)
+
     if doc.docstatus != 0:
         frappe.throw("Request can only be submitted from Draft.")
 
@@ -209,6 +224,9 @@ def submit_request(docname):
     return {"status": "success", "message": "Request submitted successfully"}
 
 
+# ===================================================================
+# CUSTOM BUTTON: APPROVE
+# ===================================================================
 @frappe.whitelist()
 def approve_request(docname, remark):
     try:
@@ -217,7 +235,7 @@ def approve_request(docname, remark):
         if doc.status != "Pending":
             frappe.throw("Request can only be approved from Pending state.")
 
-        # Workflow action
+        # Insert Workflow Action
         frappe.get_doc({
             "doctype": "Workflow Action",
             "reference_doctype": "Request Management",
@@ -225,7 +243,7 @@ def approve_request(docname, remark):
             "workflow_state": "Approved"
         }).insert(ignore_permissions=True)
 
-        # Remark comment
+        # Add comment
         frappe.get_doc({
             "doctype": "Comment",
             "comment_type": "Comment",
@@ -235,7 +253,7 @@ def approve_request(docname, remark):
             "comment_by": frappe.session.user
         }).insert(ignore_permissions=True)
 
-        # Set approved state FIRST
+        # Update DB first
         frappe.db.set_value("Request Management", docname, "workflow_state", "Approved")
         frappe.db.set_value("Request Management", docname, "status", "Approved")
         frappe.db.commit()
@@ -256,14 +274,18 @@ def approve_request(docname, remark):
         frappe.throw(f"Failed to approve request: {str(e)}")
 
 
+# ===================================================================
+# CUSTOM BUTTON: REJECT
+# ===================================================================
 @frappe.whitelist()
 def reject_request(docname, remark):
     try:
         doc = frappe.get_doc("Request Management", docname)
-        if doc.docstatus != 1:
-            frappe.throw("Request must be in Submitted state to reject.")
 
-        # Workflow action
+        if doc.docstatus != 1:
+            frappe.throw("Request must be submitted before it can be rejected.")
+
+        # Workflow Action
         frappe.get_doc({
             "doctype": "Workflow Action",
             "reference_doctype": "Request Management",
@@ -271,7 +293,7 @@ def reject_request(docname, remark):
             "workflow_state": "Rejected"
         }).insert(ignore_permissions=True)
 
-        # Add remark
+        # Comment
         frappe.get_doc({
             "doctype": "Comment",
             "comment_type": "Comment",
@@ -281,6 +303,7 @@ def reject_request(docname, remark):
             "comment_by": frappe.session.user
         }).insert(ignore_permissions=True)
 
+        # Update fields
         frappe.db.set_value("Request Management", docname, "workflow_state", "Rejected")
         frappe.db.set_value("Request Management", docname, "status", "Rejected")
         frappe.db.set_value("Request Management", docname, "docstatus", 2)
@@ -291,7 +314,7 @@ def reject_request(docname, remark):
         except:
             pass
 
-        return {"status": "success", "message": "Request rejected."}
+        return {"status": "success", "message": "Request rejected"}
 
     except Exception as e:
         frappe.log_error(f"Reject error {docname}: {str(e)}")
