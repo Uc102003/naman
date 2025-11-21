@@ -42,14 +42,11 @@ fixtures = [
     ]}
 ]
 
+
 #app_include_js = "/assets/naman/js/request_management.js"
 #app_include_css = "/assets/naman/css/request_management.css"
 
-scheduler_events = {
-    "hourly": [
-        "naman.naman.doctype.request_management.request_management.auto_submit_old_requests"
-    ]
-}
+
 
 
 
